@@ -21,3 +21,9 @@ func (i *List) Add(x Elem) {
 	i.elems = append(i.elems, x)
 	i.elements = i.elements + 1
 }
+
+//AddRange : Adds elements of a list or array, it wil recive an array and it will add it at the end of the list
+func (i *List) AddRange(x []Elem) {
+	i.elems = append(i.elems, x...)
+	i.elements = i.elements + len(x)
+}

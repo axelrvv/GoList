@@ -43,3 +43,26 @@ func TestAdd(t *testing.T) {
 		}
 	}
 }
+
+func TestAddRange(t *testing.T) {
+	list := NewList()
+	x := []Elem{"uno", "dos"}
+	y := []Elem{"uno", "dos", "tres"}
+	tests := []struct {
+		elems []Elem
+		len   int
+	}{
+		{x, 2},
+		{y, 5},
+	}
+
+	for index, test := range tests {
+		testname := fmt.Sprintf("TestAddRange %v", index+1)
+		list.AddRange(test.elems)
+		t.Run(testname, func(t *testing.T) {
+			if len(list.elems) != test.len {
+				t.Errorf("Expected %v", test.len)
+			}
+		})
+	}
+}
