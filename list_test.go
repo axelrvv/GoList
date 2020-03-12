@@ -48,12 +48,14 @@ func TestAddRange(t *testing.T) {
 	list := NewList()
 	x := []Elem{"uno", "dos"}
 	y := []Elem{"uno", "dos", "tres"}
+	z := []Elem{}
 	tests := []struct {
 		elems []Elem
 		len   int
 	}{
 		{x, 2},
 		{y, 5},
+		{z, 5},
 	}
 
 	for index, test := range tests {
@@ -64,5 +66,51 @@ func TestAddRange(t *testing.T) {
 				t.Errorf("Expected %v", test.len)
 			}
 		})
+	}
+}
+
+func TestBinarySearch(t *testing.T) {
+	list := NewList()
+	el := []Elem{
+		1, 2, 3, 4, 5,
+	}
+	list.AddRange(el)
+
+	var expected int
+
+	t.Run("If the values is not in the list", func(t *testing.T) {
+		expected = list.BinarySearch(1233)
+		if expected != -1 {
+			t.Errorf("Expected %v", -1)
+		}
+	})
+
+	t.Run("If values is in the list", func(t *testing.T) {
+		expected = list.BinarySearch(5)
+		if expected != 4 {
+			t.Errorf("Expected %v", 4)
+		}
+	})
+}
+
+func TestClear(t *testing.T) {
+	list := NewList()
+	listElements := []Elem{
+		"Uno",
+		"Dos",
+		"Tres",
+	}
+
+	list.AddRange(listElements)
+	list.Clear()
+
+	t.Run("list.elements should be 0", func(t *testing.T) {
+		if list.elements != 0 {
+			t.Errorf("Expected %v", 0)
+		}
+	})
+
+	if len(list.elems) != 0 {
+		t.Errorf("Expected %v", 0)
 	}
 }

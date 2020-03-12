@@ -27,3 +27,20 @@ func (i *List) AddRange(x []Elem) {
 	i.elems = append(i.elems, x...)
 	i.elements = i.elements + len(x)
 }
+
+//BinarySearch : Looks for an Elem and returns the index of that element
+func (i *List) BinarySearch(x Elem) int {
+	for index, elem := range i.elems {
+		if x == elem {
+			return index
+		}
+	}
+
+	return -1
+}
+
+//Clear : Removes all the elements from the list
+func (i *List) Clear() {
+	i.elems = i.elems[:0]
+	i.elements = 0
+}
