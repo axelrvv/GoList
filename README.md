@@ -8,8 +8,8 @@ GoList is a dynamic array data structure based on C#'s dynamic array (List).
 - **BinarySearch** [*Done*] --> Search the element and returns an index of the element.
 - **Clear** [*Done*] --> Removes all the elements from a List.
 - **Contains** [*Done*] --> Checks whether the speciied element exists or not in a List.
-- **Insert** [*In process*] --> Inserts an element at the specified index in a List
-- **InsertRange** [*In process*] --> Inserts elements of another collection at the specified index.
+- **Insert** [*Done*] --> Inserts an element at the specified index in a List
+- **InsertRange** [*Done*] --> Inserts elements of another collection at the specified index.
 - **Remove** [*In process*] --> Removes the first occurence of the specified element. 
 - **RemoveAt** [*In process*] --> Removes the element at the specified index.
 - **RemoveRange** [*In process*] --> Removes all the elements that match with the supplied predicate function.

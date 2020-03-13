@@ -35,6 +35,7 @@ func TestAdd(t *testing.T) {
 	}{
 		{10, 1},
 		{"Test", 2},
+		{true, 3},
 	}
 	for _, test := range tests {
 		list.Add(test.added)
@@ -42,6 +43,11 @@ func TestAdd(t *testing.T) {
 			t.Errorf("Expected %v", test.expected)
 		}
 	}
+	t.Run("If size increases", func(t *testing.T) {
+		if list.elements != 3 {
+			t.Errorf("Expected %v", 3)
+		}
+	})
 }
 
 func TestAddRange(t *testing.T) {
@@ -67,6 +73,11 @@ func TestAddRange(t *testing.T) {
 			}
 		})
 	}
+	t.Run("If size increases", func(t *testing.T) {
+		if len(list.elems) != 5 {
+			t.Errorf("Expected %v", 5)
+		}
+	})
 }
 
 func TestBinarySearch(t *testing.T) {
@@ -130,6 +141,78 @@ func TestContains(t *testing.T) {
 	t.Run("If Elem doesn't exist", func(t *testing.T) {
 		if test != false {
 			t.Errorf("Expected %v", false)
+		}
+	})
+}
+
+func TestInsert(t *testing.T) {
+	list := NewList()
+	add := []Elem{
+		1, 2, 3, 4, 5,
+	}
+	list.AddRange(add)
+
+	test := list.Insert(7, 8)
+	t.Run("When index out of range", func(t *testing.T) {
+		if test == nil {
+			t.Error("Expected en error")
+		}
+	})
+
+	test = list.Insert(1, 11)
+	t.Run("When index in range", func(t *testing.T) {
+		if test != nil {
+			t.Errorf("Expected %v", nil)
+		}
+	})
+
+	t.Run("If value was added", func(t *testing.T) {
+		if list.elems[1] != 11 {
+			t.Errorf("Expected %v", 1)
+		}
+	})
+
+	t.Run("If size increases", func(t *testing.T) {
+		if list.elements != 6 {
+			t.Errorf("Expected %v", list.elements)
+		}
+	})
+}
+
+func TestInsertRange(t *testing.T) {
+	list := NewList()
+	add := []Elem{
+		1, 2, 3, 4, 5,
+	}
+	list.AddRange(add)
+	inserted := []Elem{6, 7, 8}
+
+	test := list.InsertRange(7, inserted)
+	t.Run("When index out of range", func(t *testing.T) {
+		if test == nil {
+			t.Error("Expected an error")
+		}
+	})
+
+	test = list.InsertRange(1, inserted)
+	t.Run("When index in range", func(t *testing.T) {
+		if test != nil {
+			t.Errorf("Expected %v", nil)
+		}
+	})
+
+	for j := 1; j <= len(inserted); j++ {
+		testname := fmt.Sprintf("If value is %v", list.elems[j])
+		t.Run(testname, func(t *testing.T) {
+			if inserted[j-1] != list.elems[j] {
+				t.Errorf("Expected %v", inserted[j-1])
+			}
+		})
+	}
+
+	t.Run("If size increased", func(t *testing.T) {
+		if list.elements != 8 {
+			t.Errorf("Expected %v", list.elements)
 		}
 	})
 }
