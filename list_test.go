@@ -114,3 +114,22 @@ func TestClear(t *testing.T) {
 		t.Errorf("Expected %v", 0)
 	}
 }
+
+func TestContains(t *testing.T) {
+	list := NewList()
+	list.Add(1)
+	list.Add("Uno")
+
+	test := list.Contains(1)
+	t.Run("If Elem exists", func(t *testing.T) {
+		if test != true {
+			t.Errorf("Expected %v", true)
+		}
+	})
+	test = list.Contains(4)
+	t.Run("If Elem doesn't exist", func(t *testing.T) {
+		if test != false {
+			t.Errorf("Expected %v", false)
+		}
+	})
+}

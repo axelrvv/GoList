@@ -44,3 +44,12 @@ func (i *List) Clear() {
 	i.elems = i.elems[:0]
 	i.elements = 0
 }
+
+//Contains checks whether the speciied element exists or not in a List.
+func (i *List) Contains(x Elem) bool {
+	exists := i.BinarySearch(x)
+	if exists == -1 {
+		return false
+	}
+	return true
+}
