@@ -18,7 +18,7 @@ func NewList() List {
 	return list
 }
 
-//Add : Adds an element into the List
+//Add : Adds an element at the end of a List
 func (i *List) Add(x Elem) {
 	i.elems = append(i.elems, x)
 	i.elements = i.elements + 1
@@ -42,7 +42,7 @@ func (i *List) BinarySearch(x Elem) int {
 	return -1
 }
 
-//Clear : Removes all the elements from the List
+//Clear : Removes all the elements from a List
 func (i *List) Clear() {
 	i.elems = i.elems[:0]
 	i.elements = 0
@@ -59,7 +59,7 @@ func (i *List) Contains(x Elem) bool {
 
 //Insert : Inserts an Elem in the index specified
 func (i *List) Insert(index int, x Elem) error {
-	if i.elements < index {
+	if i.elements < index || index < 0 {
 		return errors.New("Index must be within the bound of the List (Parameter 'index')")
 	}
 	rest := i.elems[index:]
@@ -72,7 +72,7 @@ func (i *List) Insert(index int, x Elem) error {
 
 //InsertRange : Inserts a []Elem from the index specified to the len of []Elem inserted
 func (i *List) InsertRange(index int, x []Elem) error {
-	if i.elements < index {
+	if i.elements < index || index < 0 {
 		return errors.New("Index must be within the bound of the List (Parameter 'index')")
 	}
 	rest := i.elems[index:]
@@ -81,4 +81,31 @@ func (i *List) InsertRange(index int, x []Elem) error {
 	i.elems = append(i.elems, rest...)
 	i.elements = i.elements + len(x)
 	return nil
+}
+
+//Remove : Removes the first occurence of the specified element
+func (i *List) Remove(x Elem) error {
+
+	if i.Contains(x) {
+		index := i.BinarySearch(x)
+		i.elems = append(i.elems[:index], i.elems[index+1:]...)
+		i.elements = i.elements - 1
+		return nil
+	}
+
+	return errors.New("Element doesn't exist in the list")
+}
+
+//RemoveAt : Removes the element at the specified index
+func (i *List) RemoveAt(index int) error {
+
+	if i.elements == 0 {
+		return errors.New("List is empty")
+	}
+
+	if index >= i.elements || index < 0 {
+		return errors.New("Index out of range")
+	}
+
+	return i.Remove(i.elems[index])
 }

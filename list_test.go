@@ -81,13 +81,20 @@ func TestAddRange(t *testing.T) {
 }
 
 func TestBinarySearch(t *testing.T) {
+	var expected int
 	list := NewList()
+
+	t.Run("If list is empty", func(t *testing.T) {
+		expected = list.BinarySearch(1)
+		if expected != -1 {
+			t.Errorf("Expected %v", -1)
+		}
+	})
+
 	el := []Elem{
 		1, 2, 3, 4, 5,
 	}
 	list.AddRange(el)
-
-	var expected int
 
 	t.Run("If the values is not in the list", func(t *testing.T) {
 		expected = list.BinarySearch(1233)
@@ -153,7 +160,14 @@ func TestInsert(t *testing.T) {
 	list.AddRange(add)
 
 	test := list.Insert(7, 8)
-	t.Run("When index out of range", func(t *testing.T) {
+	t.Run("When index out of range (Positive)", func(t *testing.T) {
+		if test == nil {
+			t.Error("Expected en error")
+		}
+	})
+
+	test = list.Insert(-7, 8)
+	t.Run("When index out of range (Negative)", func(t *testing.T) {
 		if test == nil {
 			t.Error("Expected en error")
 		}
@@ -188,7 +202,14 @@ func TestInsertRange(t *testing.T) {
 	inserted := []Elem{6, 7, 8}
 
 	test := list.InsertRange(7, inserted)
-	t.Run("When index out of range", func(t *testing.T) {
+	t.Run("When index out of range (Positive)", func(t *testing.T) {
+		if test == nil {
+			t.Error("Expected an error")
+		}
+	})
+
+	test = list.InsertRange(-7, inserted)
+	t.Run("When index out of range (Negative)", func(t *testing.T) {
 		if test == nil {
 			t.Error("Expected an error")
 		}
@@ -213,6 +234,93 @@ func TestInsertRange(t *testing.T) {
 	t.Run("If size increased", func(t *testing.T) {
 		if list.elements != 8 {
 			t.Errorf("Expected %v", list.elements)
+		}
+	})
+}
+
+func TestRemove(t *testing.T) {
+	var expected error
+	list := NewList()
+
+	t.Run("If element not in list", func(t *testing.T) {
+		expected = list.Remove("Test")
+		if expected == nil {
+			t.Error("Expected an error")
+		}
+	})
+
+	add := []Elem{
+		1, 2, 3, 4, 5,
+	}
+	list.AddRange(add)
+
+	expected = list.Remove(3)
+	t.Run("If expected return", func(t *testing.T) {
+		if expected != nil {
+			t.Errorf("Expected %v", nil)
+		}
+	})
+
+	t.Run("If Elem was removed", func(t *testing.T) {
+		test := list.Contains(3)
+		if test == true {
+			t.Errorf("Expected %v", false)
+		}
+	})
+
+	t.Run("If size reduces", func(t *testing.T) {
+		if list.elements != 4 {
+			t.Errorf("Expected %v", 4)
+		}
+	})
+}
+
+func TestRemoveAt(t *testing.T) {
+	var expected error
+	list := NewList()
+
+	t.Run("When list is empty", func(t *testing.T) {
+		expected = list.RemoveAt(4)
+		if expected == nil {
+			t.Error("Expected an error")
+		}
+	})
+
+	add := []Elem{
+		1, 2, 3, 4, 5,
+	}
+	list.AddRange(add)
+
+	t.Run("When index out of range (Positive)", func(t *testing.T) {
+		expected = list.RemoveAt(7)
+		if expected == nil {
+			t.Error("Expected an error")
+		}
+	})
+
+	t.Run("When index out of range (Negative)", func(t *testing.T) {
+		expected = list.RemoveAt(-7)
+		if expected == nil {
+			t.Error("Expected an error")
+		}
+	})
+
+	expected = list.RemoveAt(0)
+	t.Run("If expected return", func(t *testing.T) {
+		if expected != nil {
+			t.Errorf("Expected %v", nil)
+		}
+	})
+
+	t.Run("If Elem was temoved", func(t *testing.T) {
+		if list.elems[0] == 1 {
+			t.Errorf("Expected %v", 2)
+		}
+	})
+
+	t.Run("If size reduces", func(t *testing.T) {
+		if list.elements != 4 {
+			t.Errorf("Expected %v", 4)
 		}
 	})
 }
