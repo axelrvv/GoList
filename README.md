@@ -8,10 +8,10 @@ GoList is a dynamic array data structure based on C#'s dynamic array (List).
 | **Add** | ✅ | Adds an element at the end of a List |
 | **AddRange** | ✅ | Adds elements of the specified collection at the end of a List. |
 | **BinarySearch** | ✅ | Search the element and returns an index of the element |
-| **Clear** ✅ | Removes all the elements from a List |
+| **Clear**  | ✅ | Removes all the elements from a List |
 | **Contains** | ✅ | Checks whether the speciied element exists or not in a List |
-| **Insert** ✅ | Inserts an element at the specified index in a List |
-| **InsertRange** |✅ | Inserts elements of another collection at the specified index |
+| **Insert** | ✅ | Inserts an element at the specified index in a List |
+| **InsertRange** | ✅ | Inserts elements of another collection at the specified index |
 | **Remove** | ✅ | Removes the first occurence of the specified element | 
 | **RemoveAt** | ✅ | Removes the element at the specified index |
 | **RemoveRange** | *In Process* | Removes all the elements that match with the supplied predicate function |
