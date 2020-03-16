@@ -14,10 +14,9 @@ GoList is a dynamic array data structure based on C#'s dynamic array (List).
 | **InsertRange** | ✅ | Inserts elements of another collection at the specified index |
 | **Remove** | ✅ | Removes the first occurence of the specified element | 
 | **RemoveAt** | ✅ | Removes the element at the specified index |
-| **RemoveRange** | *In Process* | Removes all the elements that match with the supplied predicate function |
-| **Sort** | *Pending* | Sorts all the elements |
-| **TrimExcess** | *Pending* | Sets the capacity to the actual number of elements |
-| **TrueForAll** | *Pending* | Determines whether every element in the List matches the conditions defined by the specified predicate |
+| **RemoveRange** | ✅ | Removes a range of elements from the list |
+| **Count** | ✅ | Gets the number of elements contained in the list |
+| **Sort** | *In Process* | Sorts all the elements |
 
 # Download
 

@@ -107,5 +107,43 @@ func (i *List) RemoveAt(index int) error {
 		return errors.New("Index out of range")
 	}
 
-	return i.Remove(i.elems[index])
+	i.elems = append(i.elems[:index], i.elems[index+1:]...)
+	i.elements--
+	return nil
+}
+
+//RemoveRange : Removes from startIndex to endIndex from the list (Taking those as an index from the list)
+func (i *List) RemoveRange(startIndex, endIndex int) error {
+
+	if i.elements == 0 {
+		return errors.New("List is empty")
+	}
+
+	if endIndex < startIndex {
+		return errors.New("End has to be bigger than start")
+	}
+
+	if startIndex >= i.elements || startIndex < 0 {
+		return errors.New("Index out of range")
+	}
+
+	/*No validation when endIndex is under 0. Because for that to happend
+	startIndex must be under 0 for it to make it to this condition.
+	On line 120 validates that endIndex is bigger than startIndex and on line
+	124 validates that startIndex is over 0.
+
+	So if endIndex is under 0 by the time it gets to this condition this function
+	would've already thrown an error*/
+	if endIndex >= i.elements {
+		return errors.New("Index out of range)")
+	}
+
+	i.elems = append(i.elems[:startIndex], i.elems[endIndex+1:]...)
+	i.elements = i.elements - (endIndex - startIndex + 1)
+	return nil
+}
+
+//Count : Gets the number of elements contained in the list
+func (i *List) Count() int {
+	return i.elements
 }
