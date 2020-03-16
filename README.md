@@ -135,4 +135,10 @@ func main() {
 
 	fmt.Printf("Name: %v; Age: %v; Weight: %v", name, age, weight)
 }
+
+/*
+Output
+
+Name: Axel Vasquez; Age: 22; Weight: 180.88
+*/
 ```
