@@ -147,3 +147,12 @@ func (i *List) RemoveRange(startIndex, endIndex int) error {
 func (i *List) Count() int {
 	return i.elements
 }
+
+//IndexOf : Searches for the specified index and returns the value of it
+func (i *List) IndexOf(index int) (Elem, error) {
+	if index > i.elements || index < 0 {
+		return "Nothing", errors.New("Index out of range")
+	}
+
+	return i.elems[index], nil
+}

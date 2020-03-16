@@ -428,6 +428,43 @@ func TestCount(t *testing.T) {
 	})
 }
 
+func TestIndexOf(t *testing.T) {
+	list := NewList()
+
+	t.Run("When list is empty", func(t *testing.T) {
+		_, err := list.IndexOf(1)
+		if err == nil {
+			t.Error("Expected an error")
+		}
+	})
+
+	add := []Elem{
+		1, 2, 3, 4, 5,
+	}
+	list.AddRange(add)
+
+	t.Run("When index out range(Positive)", func(t *testing.T) {
+		test, err := list.IndexOf(7)
+		if err == nil || test != "Nothing" {
+			t.Error("Expected an error")
+		}
+	})
+
+	t.Run("When index out range(Negative)", func(t *testing.T) {
+		test, err := list.IndexOf(-7)
+		if err == nil || test != "Nothing" {
+			t.Error("Expected an error")
+		}
+	})
+
+	t.Run("If expected return", func(t *testing.T) {
+		test, err := list.IndexOf(0)
+		if err != nil || test != 1 {
+			t.Errorf("Expected %v and %v", 1, nil)
+		}
+	})
+}
+
 /*
 Test output
 
@@ -446,7 +483,7 @@ Test output
 === RUN   TestAddRange/TestAddRange_2
 === RUN   TestAddRange/TestAddRange_3
 === RUN   TestAddRange/If_size_increases
---- PASS: TestAddRange (0.00s)
+--- PASS: TestAddRange (0.01s)
     --- PASS: TestAddRange/TestAddRange_1 (0.00s)
     --- PASS: TestAddRange/TestAddRange_2 (0.00s)
     --- PASS: TestAddRange/TestAddRange_3 (0.00s)
@@ -461,12 +498,12 @@ Test output
     --- PASS: TestBinarySearch/If_values_is_in_the_list (0.00s)
 === RUN   TestClear
 === RUN   TestClear/list.elements_should_be_0
---- PASS: TestClear (0.00s)
+--- PASS: TestClear (0.01s)
     --- PASS: TestClear/list.elements_should_be_0 (0.00s)
 === RUN   TestContains
 === RUN   TestContains/If_Elem_exists
 === RUN   TestContains/If_Elem_doesn't_exist
---- PASS: TestContains (0.00s)
+--- PASS: TestContains (0.02s)
     --- PASS: TestContains/If_Elem_exists (0.00s)
     --- PASS: TestContains/If_Elem_doesn't_exist (0.00s)
 === RUN   TestInsert
@@ -475,7 +512,7 @@ Test output
 === RUN   TestInsert/When_index_in_range
 === RUN   TestInsert/If_value_was_added
 === RUN   TestInsert/If_size_increases
---- PASS: TestInsert (0.00s)
+--- PASS: TestInsert (0.01s)
     --- PASS: TestInsert/When_index_out_of_range_(Positive) (0.00s)
     --- PASS: TestInsert/When_index_out_of_range_(Negative) (0.00s)
     --- PASS: TestInsert/When_index_in_range (0.00s)
@@ -514,7 +551,7 @@ Test output
 === RUN   TestRemoveAt/If_expected_return
 === RUN   TestRemoveAt/If_Elem_was_removed
 === RUN   TestRemoveAt/If_size_reduces
---- PASS: TestRemoveAt (0.00s)
+--- PASS: TestRemoveAt (0.01s)
     --- PASS: TestRemoveAt/When_list_is_empty (0.00s)
     --- PASS: TestRemoveAt/When_index_out_of_range_(Positive) (0.00s)
     --- PASS: TestRemoveAt/When_index_out_of_range_(Negative) (0.00s)
@@ -531,7 +568,7 @@ Test output
 === RUN   TestRemoveRange/If_expected_return
 === RUN   TestRemoveRange/If_Elems_removed
 === RUN   TestRemoveRange/If_size_reduces
---- PASS: TestRemoveRange (0.00s)
+--- PASS: TestRemoveRange (0.08s)
     --- PASS: TestRemoveRange/When_list_is_empty (0.00s)
     --- PASS: TestRemoveRange/When_start_is_bigger_than_the_end (0.00s)
     --- PASS: TestRemoveRange/When_startIndex_is_bigger_than_the_endIndex (0.00s)
@@ -545,10 +582,20 @@ Test output
 === RUN   TestCount/When_list_is_empty
 === RUN   TestCount/When_list_not_empty
 === RUN   TestCount/When_one_removed
---- PASS: TestCount (0.00s)
+--- PASS: TestCount (0.02s)
     --- PASS: TestCount/When_list_is_empty (0.00s)
     --- PASS: TestCount/When_list_not_empty (0.00s)
     --- PASS: TestCount/When_one_removed (0.00s)
+=== RUN   TestIndexOf
+=== RUN   TestIndexOf/When_list_is_empty
+=== RUN   TestIndexOf/When_index_out_range(Positive)
+=== RUN   TestIndexOf/When_index_out_range(Negative)
+=== RUN   TestIndexOf/If_expected_return
+--- PASS: TestIndexOf (0.00s)
+    --- PASS: TestIndexOf/When_list_is_empty (0.00s)
+    --- PASS: TestIndexOf/When_index_out_range(Positive) (0.00s)
+    --- PASS: TestIndexOf/When_index_out_range(Negative) (0.00s)
+    --- PASS: TestIndexOf/If_expected_return (0.00s)
 PASS
-ok      List    0.966s
+ok      List    1.031s
 */

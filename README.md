@@ -4,7 +4,7 @@ GoList is a dynamic array data structure based on C#'s dynamic array (List).
 
 ## Features
 | Feature | Status | Actions |
-| ----------------- | ----------------- | ----------------- |
+| ----------------- | -------------- | ----------------- |
 | **Add** | ✅ | Adds an element at the end of a List |
 | **AddRange** | ✅ | Adds elements of the specified collection at the end of a List. |
 | **BinarySearch** | ✅ | Search the element and returns an index of the element |
@@ -16,6 +16,7 @@ GoList is a dynamic array data structure based on C#'s dynamic array (List).
 | **RemoveAt** | ✅ | Removes the element at the specified index |
 | **RemoveRange** | ✅ | Removes a range of elements from the list |
 | **Count** | ✅ | Gets the number of elements contained in the list |
+| **IndexOf** | ✅ | Searches for the specified index and returns the value of it |
 | **Sort** | *In Process* | Sorts all the elements |
 
 # Download
