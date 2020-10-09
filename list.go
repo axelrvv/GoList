@@ -156,3 +156,15 @@ func (i *List) IndexOf(index int) (Elem, error) {
 
 	return i.elems[index], nil
 }
+
+//AddInFront : Adds an element in front of the list
+func (i *List) AddInFront(x Elem) error {
+
+	if i.elements == 0 {
+		i.Add(x)
+	} else {
+		i.Insert(0, x)
+	}
+
+	return nil
+}

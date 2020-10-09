@@ -465,6 +465,30 @@ func TestIndexOf(t *testing.T) {
 	})
 }
 
+func TestAddInFront(t *testing.T) {
+	list := NewList()
+
+	err := list.AddInFront(2)
+
+	t.Run("When list is empty", func(t *testing.T) {
+		if err != nil {
+			t.Error("No error expected")
+		}
+	})
+
+	t.Run("If element added", func(t *testing.T) {
+		if list.elements != 1 {
+			t.Error("A number should be added")
+		}
+	})
+
+	t.Run("Check if the element added was the one", func(t *testing.T) {
+		if list.elems[0] != 2 {
+			t.Errorf("Expected number %v to be in that position", list.elems[0])
+		}
+	})
+}
+
 /*
 Test output
 
